@@ -1,0 +1,11 @@
+telegram:
+  maxIteration: 3
+  botToken: ""
+  userIds:
+    - 1 
+
+web-info:
+  host: "https://investing.com"
+  watchlist-path: "/portfolio/?portfolioID=ID" # Change ID
+  email: ""
+  password: ""

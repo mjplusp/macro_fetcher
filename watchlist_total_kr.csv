@@ -1,0 +1,434 @@
+종목,기호,거래소
+미국 달러 지수 선물,DX,ICE
+코스피지수,.KS11,KS
+코스닥,.KQ11,KQ
+코스피 200,.KS200,KS
+코스피200 선물 (F),KOR200c1,KRX
+KOSPI Volatility,.KSVKOSPI,KS
+다우존스,.DJI,NYSE
+US 30 Cash,US30,US Indexes
+러셀 2000 지수,US2000,NYSE
+US 2000 Cash,US2000,US Indexes
+S&P 500,US500,NYSE
+US 500 Cash,US500,US Indexes
+나스닥 100,.NDX,NASDAQ
+US Tech 100 Cash,USTECH,US Indexes
+나스닥종합지수,.IXIC,NASDAQ
+CBOE Volatility Index,VIX,CBOE
+S&P 500 VIX 선물,VX,CBOE
+USD/CNY - 미국 달러 중국 위안,USD/CNY - 미국 달러 중국 위안,외환
+USD/GBP - 미국 달러 영국 파운드,USD/GBP - 미국 달러 영국 파운드,외환
+USD/EUR - 미국 달러 유로,USD/EUR - 미국 달러 유로,외환
+USD/JPY - 미국 달러 일본 엔,USD/JPY - 미국 달러 일본 엔,외환
+USD/CHF - 미국 달러 스위스 프랑,USD/CHF - 미국 달러 스위스 프랑,외환
+USD/SEK - 미국 달러 스웨덴 크로나,USD/SEK - 미국 달러 스웨덴 크로나,외환
+USD/CAD - 미국 달러 캐나다 달러,USD/CAD - 미국 달러 캐나다 달러,외환
+USD/AUD - 미국 달러 호주 달러,USD/AUD - 미국 달러 호주 달러,외환
+USD/HKD - 미국 달러 홍콩 달러,USD/HKD - 미국 달러 홍콩 달러,외환
+USD/SGD - 미국 달러 싱가폴 달러,USD/SGD - 미국 달러 싱가폴 달러,외환
+USD/QAR - 미국 달러 카타르 리얄,USD/QAR - 미국 달러 카타르 리얄,외환
+USD/HUF - 미국 달러 헝가리 포린트,USD/HUF - 미국 달러 헝가리 포린트,외환
+USD/NOK - 미국 달러 노르웨이 크로네,USD/NOK - 미국 달러 노르웨이 크로네,외환
+USD/ZAR - 미국 달러 남아프리카 란드,USD/ZAR - 미국 달러 남아프리카 란드,외환
+USD/XPF - 미국 달러 프랑스 퍼시픽 프랑,USD/XPF - 미국 달러 프랑스 퍼시픽 프랑,외환
+USD/PLN - 미국 달러 폴란드 즈워티,USD/PLN - 미국 달러 폴란드 즈워티,외환
+USD/ILS - 미국 달러 이스라엘 세켈,USD/ILS - 미국 달러 이스라엘 세켈,외환
+USD/TRY - 미국 달러 터키 리라,USD/TRY - 미국 달러 터키 리라,외환
+USD/THB - 미국 달러 태국 바트,USD/THB - 미국 달러 태국 바트,외환
+USD/RUB - 미국 달러 러시아 루블,USD/RUB - 미국 달러 러시아 루블,외환
+USD/IDR - 미국 달러 인도네시아 루피아,USD/IDR - 미국 달러 인도네시아 루피아,외환
+USD/INR - 미국 달러 인도 루피,USD/INR - 미국 달러 인도 루피,외환
+USD/BRL - 미국 달러 브라질 헤알,USD/BRL - 미국 달러 브라질 헤알,외환
+USD/KRW - 미국 달러 원,USD/KRW - 미국 달러 원,외환
+CNY/KRW - 중국 위안 원,CNY/KRW - 중국 위안 원,외환
+JPY/KRW - 일본 엔 원,JPY/KRW - 일본 엔 원,외환
+BTC/USD - 비트코인 미국 달러,BTC/USD - 비트코인 미국 달러,Binance
+ETH/USD - 이더리움 미국 달러,ETH/USD - 이더리움 미국 달러,Binance
+XRP/USD - XRP 미국 달러,XRP/USD - XRP 미국 달러,Binance
+미국 1개월,US1MT=RR,NYSE
+미국 3개월,US3MT=RR,NYSE
+미국 6개월,US6MT=RR,NYSE
+미국 1년,US1YT=RR,NYSE
+미국 2년,US2YT=RR,NYSE
+미국 3년,US3YT=RR,NYSE
+미국 5년,US5YT=RR,NYSE
+미국 7년,US7YT=RR,NYSE
+미국 10년물 국채 금리 ,US10YT=RR,NYSE
+미국 20년,US20YT=RR,NYSE
+미국 30년,US30YT=RR,NYSE
+한국 1년,KR1YT=RR,KS
+한국 2년,KR2YT=RR,KS
+한국 3년,KR3YT=RR,KS
+한국 4년,KR4YT=RR,KS
+한국 5년,KR5YT=RR,KS
+한국 10년,KR10YT=RR,KS
+한국 20년,KR20YT=RR,KS
+한국 30년,KR30YT=RR,KS
+한국 50년,KR50YT=RR,KS
+중국 1년,CN1YT=RR,SS
+중국 2년,CN2YT=RR,SS
+중국 3년,CN3YT=RR,SS
+중국 5년,CN5YT=RR,SS
+중국 7년,CN7YT=RR,SS
+중국 10년,CN10YT=RR,SS
+중국 15년,CN15YT=RR,SS
+중국 20년,CN20YT=RR,SS
+중국 30년,CN30YT=RR,SS
+홍콩 1주,HK1WT=RR,HK
+홍콩 1개월,HK1MT=RR,HK
+홍콩 3개월,HK3MT=RR,HK
+홍콩 6개월,HK6MT=RR,HK
+홍콩 9개월,HK9MT=RR,HK
+홍콩 1년,HK1YT=RR,HK
+홍콩 2년,HK2YT=RR,HK
+홍콩 3년,HK3YT=RR,HK
+홍콩 5년,HK5YT=RR,HK
+홍콩 7년,HK7YT=RR,HK
+홍콩 10년,HK10YT=RR,HK
+홍콩 15년,HK15YT=RR,HK
+싱가폴 1개월,SG1MT=RR,SGX
+싱가폴 3개월,SG3MT=RR,SGX
+싱가폴 6개월,SG6MT=RR,SGX
+싱가폴 1년,SG1YT=RR,SGX
+싱가폴 2년,SG2YT=RR,SGX
+싱가폴 5년,SG5YT=RR,SGX
+싱가폴 10년,SG10YT=RR,SGX
+싱가폴 15년,SG15YT=RR,SGX
+싱가폴 20년,SG20YT=RR,SGX
+싱가폴 30년,SG30YT=RR,SGX
+일본 1개월,JP1MT=RR,TYO
+일본 3개월,JP3MT=RR,TYO
+일본 6개월,JP6MT=RRPS,TYO
+일본 9개월,JP9MT=RR,TYO
+일본 1년,JP1YT=RR,TYO
+일본 2년,JP2YT=RR,TYO
+일본 3년,JP3YT=RR,TYO
+일본 4년,JP4YT=RR,TYO
+일본 5년,JP5YT=RR,TYO
+일본 6년,JP6YT=RR,TYO
+일본 7년,JP7YT=RR,TYO
+일본 8년,JP8YT=RR,TYO
+일본 9년,JP9YT=RR,TYO
+일본 10년,JP10YT=RR,TYO
+일본 15년,JP15YT=RR,TYO
+일본 20년,JP20YT=RR,TYO
+일본 30년,JP30YT=RR,TYO
+일본 40년,JP40YT=RR,TYO
+핀란드 2년,FI2YT=RR,HE
+핀란드 3년,FI3YT=RR,HE
+핀란드 4년,FI4YT=RR,HE
+핀란드 5년,FI5YT=RR,HE
+핀란드 6년,FI6YT=RR,HE
+핀란드 8년,FI8YT=RR,HE
+핀란드 10년,FI10YT=RR,HE
+핀란드 15년,FI15YT=RR,HE
+핀란드 30년,FI30YT=RR,HE
+카타르 2년,QAEURO2YT=RR,QE
+카타르 5년,QAEURO5YT=RR,QE
+카타르 10년,QAEURO10YT=RR,QE
+카타르 30년,QAEURO30YT=RR,QE
+헝가리 3개월,HU3MT=RR,BU
+헝가리 6개월,HU6MT=RR,BU
+헝가리 1년,HU1YT=RR,BU
+헝가리 3년,HU3YT=RR,BU
+헝가리 5년,HU5YT=RR,BU
+헝가리 10년,HU10YT=RR,BU
+헝가리 15년,HU15YT=RR,BU
+노르웨이 3개월,NO3MT=RR,OL
+노르웨이 6개월,NO6MT=RR,OL
+노르웨이 9개월,NO9MT=RR,OL
+노르웨이 1년,NO1YT=RR,OL
+노르웨이 5년,NO5YT=RR,OL
+노르웨이 10년,NO10YT=RR,OL
+남아프리카 공화국 3개월,ZA3MT=RR,JO
+남아프리카 공화국 2년,ZA2YT=RR,JO
+남아프리카 공화국 5년,ZA5YT=RR,JO
+남아프리카 공화국 10년,ZA10YT=RR,JO
+남아프리카 공화국 20년,ZA20YT=RR,JO
+남아프리카 공화국 25년,ZA25YT=RR,JO
+남아프리카 공화국 30년,ZA30YT=RR,JO
+프랑스 1개월,FR1MT=RR,EPA
+프랑스 3개월,FR3MT=RR,EPA
+프랑스 6개월,FR6MT=RR,EPA
+프랑스 9개월,FR9MT=RR,EPA
+프랑스 1년,FR1YT=RR,EPA
+프랑스 2년,FR2YT=RR,EPA
+프랑스 3년,FR3YT=RR,EPA
+프랑스 4년,FR4YT=RR,EPA
+프랑스 5년,FR5YT=RR,EPA
+프랑스 6년,FR6YT=RR,EPA
+프랑스 7년,FR7YT=RR,EPA
+프랑스 8년,FR8YT=RR,EPA
+프랑스 9년,FR9YT=RR,EPA
+프랑스 10년,FR10YT=RR,EPA
+프랑스 15년,FR15YT=RR,EPA
+프랑스 20년,FR20YT=RR,EPA
+프랑스 25년,FR25YT=RR,EPA
+프랑스 30년,FR30YT=RR,EPA
+프랑스 50년,FR50YT=RR,EPA
+벨기에 3개월,BE3MT=RR,EBR
+벨기에 1개월,BE1MT=RR,EBR
+벨기에 6개월,BE6MT=RR,EBR
+벨기에 9개월,BE9MT=RR,EBR
+벨기에 1년,BE1YT=RR,EBR
+벨기에 2년,BE2YT=RR,EBR
+벨기에 3년,BE3YT=RR,EBR
+벨기에 4년,BE4YT=RR,EBR
+벨기에 5년,BE5YT=RR,EBR
+벨기에 6년,BE6YT=RR,EBR
+벨기에 7년,BE7YT=RR,EBR
+벨기에 8년,BE8YT=RR,EBR
+벨기에 9년,BE9YT=RR,EBR
+벨기에 10년,BE10YT=RR,EBR
+벨기에 15년,BE15YT=RR,EBR
+벨기에 20년,BE20YT=RR,EBR
+오스트리아 1년,AT1YT=RR,VIE
+오스트리아 2년,AT2YT=RR,VIE
+오스트리아 3년,AT3YT=RR,VIE
+오스트리아 4년,AT4YT=RR,VIE
+오스트리아 5년,AT5YT=RR,VIE
+오스트리아 6년,AT6YT=RR,VIE
+오스트리아 7년,AT7YT=RR,VIE
+오스트리아 8년,AT8YT=RR,VIE
+오스트리아 9년,AT9YT=RR,VIE
+오스트리아 10년,AT10YT=RR,VIE
+오스트리아 15년,AT15YT=RR,VIE
+오스트리아 20년,AT20YT=RR,VIE
+오스트리아 25년,AT25YT=RR,VIE
+오스트리아 30년,AT30YT=RR,VIE
+폴란드 오버나잇,PLOND=RR,WA
+폴란드 1개월,PL1MT=RR,WA
+폴란드 2개월,PL2MT=RR,WA
+폴란드 1년,PL1YT=RR,WA
+폴란드 2년,PL2YT=RR,WA
+폴란드 3년,PL3YT=RR,WA
+폴란드 4년,PL4YT=RR,WA
+폴란드 5년,PL5YT=RR,WA
+폴란드 6년,PL6YT=RR,WA
+폴란드 9년,PL9YT=RR,WA
+폴란드 10년,PL10YT=RR,WA
+이스라엘 1개월,IL1MT=RR,TASE
+이스라엘 3개월,IL3MT=RR,TASE
+이스라엘 6개월,IL6MT=RR,TASE
+이스라엘 9개월,IL9MT=RR,TASE
+이스라엘 1년,IL1YT=RR,TASE
+이스라엘 2년,IL2YT=RR,TASE
+이스라엘 3년,IL3YT=RR,TASE
+이스라엘 5년,IL5YT=RR,TASE
+이스라엘 10년,IL10YT=RR,TASE
+이스라엘 30년,IL30YT=RR,TASE
+네덜란드 1개월,NL1MT=RR,AS
+네덜란드 3개월,NL3MT=RR,AS
+네덜란드 6개월,NL6MT=RR,AS
+네덜란드 2년,NL2YT=RR,AS
+네덜란드 3년,NL3YT=RR,AS
+네덜란드 4년,NL4YT=RR,AS
+네덜란드 5년,NL5YT=RR,AS
+네덜란드 6년,NL6YT=RR,AS
+네덜란드 7년,NL7YT=RR,AS
+네덜란드 8년,NL8YT=RR,AS
+네덜란드 9년,NL9YT=RR,AS
+네덜란드 10년,NL10YT=RR,AS
+네덜란드 15년,NL15YT=RR,AS
+네덜란드 20년,NL20YT=RR,AS
+네덜란드 25년,NL25YT=RR,AS
+네덜란드 30년,NL30YT=RR,AS
+터키 3개월,TR3MT=RR,IS
+터키 6개월,TR6MT=RR,IS
+터키 9개월,TR9MT=RR,IS
+터키 1년,TR1YT=RR,IS
+터키 2년,TR2YT=RR,IS
+터키 3년,TR3YT=RR,IS
+터키 5년,TR5YT=RR,IS
+터키 10년,TR10YT=RR,IS
+태국 1년,TH1YT=RR,BK
+태국 2년,TH2YT=RR,BK
+태국 5년,TH5YT=RR,BK
+태국 7년,TH7YT=RR,BK
+태국 10년,TH10YT=RR,BK
+태국 12년,TH12YT=RR,BK
+태국 14년,TH14YT=RR,BK
+태국 15년,TH15YT=RR,BK
+태국 16년,TH16YT=RR,BK
+태국 20년,TH20YT=RR,BK
+러시아 오버나잇,RUOND=RR,MCX
+러시아 1주,RU1WT=RR,MCX
+러시아 2주,RU2WT=RR,MCX
+러시아 1개월,RU1MT=RR,MCX
+러시아 2개월,RU2MT=RR,MCX
+러시아 3개월,RU3MT=RR,MCX
+러시아 6개월,RU6MT=RR,MCX
+러시아 1년,RU1YT=RR,MCX
+러시아 2년,RU2YT=RR,MCX
+러시아 3년,RU3YT=RR,MCX
+러시아 5년,RU5YT=RR,MCX
+러시아 7년,RU7YT=RR,MCX
+러시아 10년,RU10YT=RR,MCX
+러시아 15년,RU15YT=RR,MCX
+러시아 20년,RU20YT=RR,MCX
+독일 6개월,DE6MT=RR,ETR
+독일 9개월,DE9MT=RR,ETR
+독일 1년,DE1YT=RR,ETR
+독일 2년,DE2YT=RR,ETR
+독일 3년,DE3YT=RR,ETR
+독일 4년,DE4YT=RR,ETR
+독일 5년,DE5YT=RR,ETR
+독일 6년,DE6YT=RR,ETR
+독일 7년,DE7YT=RR,ETR
+독일 8년,DE8YT=RR,ETR
+독일 9년,DE9YT=RR,ETR
+독일 10년,DE10YT=RR,ETR
+독일 15년,DE15YT=RR,ETR
+독일 20년,DE20YT=RR,ETR
+독일 25년,DE25YT=RR,ETR
+독일 30년,DE30YT=RR,ETR
+포르투갈 6개월,PT6MT=RR,ELI
+포르투갈 3개월,PT3MT=RR,ELI
+포르투갈 1년,PT1YT=RR,ELI
+포르투갈 2년,PT2YT=RR,ELI
+포르투갈 3년,PT3YT=RR,ELI
+포르투갈 4년,PT4YT=RR,ELI
+포르투갈 5년,PT5YT=RR,ELI
+포르투갈 6년,PT6YT=RR,ELI
+포르투갈 7년,PT7YT=RR,ELI
+포르투갈 8년,PT8YT=RR,ELI
+포르투갈 9년,PT9YT=RR,ELI
+포르투갈 10년,PT10YT=RR,ELI
+포르투갈 15년,PT15YT=RR,ELI
+포르투갈 20년,PT20YT=RR,ELI
+포르투갈 30년,PT30YT=RR,ELI
+스페인 1개월,ES1MT=RR,BME
+스페인 3개월,ES3MT=RR,BME
+스페인 6개월,ES6MT=RR,BME
+스페인 9개월,ES9MT=RR,BME
+스페인 1년,ES1YT=RR,BME
+스페인 2년,ES2YT=RR,BME
+스페인 3년,ES3YT=RR,BME
+스페인 4년,ES4YT=RR,BME
+스페인 5년,ES5YT=RR,BME
+스페인 6년,ES6YT=RR,BME
+스페인 7년,ES7YT=RR,BME
+스페인 8년,ES8YT=RR,BME
+스페인 9년,ES9YT=RR,BME
+스페인 10년,ES10YT=RR,BME
+스페인 15년,ES15YT=RR,BME
+스페인 20년,ES20YT=RR,BME
+스페인 25년,ES25YT=RR,BME
+스페인 30년,ES30YT=RR,BME
+스위스 오버나잇,CHOND=RR,SIX
+스위스 1주,CH1WT=RR,SIX
+스위스 1개월,CH1MT=RR,SIX
+스위스 2개월,CH2MT=RR,SIX
+스위스 3개월,CH3MT=RR,SIX
+스위스 6개월,CH6MT=RR,SIX
+스위스 1년,CH1YT=RR,SIX
+스위스 2년,CH2YT=RR,SIX
+스위스 3년,CH3YT=RR,SIX
+스위스 4년,CH4YT=RR,SIX
+스위스 5년,CH5YT=RR,SIX
+스위스 6년,CH6YT=RR,SIX
+스위스 7년,CH7YT=RR,SIX
+스위스 8년,CH8YT=RR,SIX
+스위스 9년,CH9YT=RR,SIX
+스위스 10년,CH10YT=RR,SIX
+스위스 15년,CH15YT=RR,SIX
+스위스 20년,CH20YT=RR,SIX
+스위스 30년,CH30YT=RR,SIX
+인도네시아 10년,ID10YT=RR,JK
+인도네시아 15년,ID15YT=RR,JK
+인도네시아 20년,ID20YT=RR,JK
+인도네시아 25년,ID25YT=RR,JK
+인도네시아 30년,ID30YT=RR,JK
+인도 3개월,IN3MT=RR,NS
+인도 6개월,IN6MT=RR,NS
+인도 1년,IN1YT=RR,NS
+인도 2년,IN2YT=RR,NS
+인도 3년,IN3YT=RR,NS
+인도 4년,IN4YT=RR,NS
+인도 5년,IN5YT=RR,NS
+인도 6년,IN6YT=RR,NS
+인도 7년,IN7YT=RR,NS
+인도 8년,IN8YT=RR,NS
+인도 9년,IN9YT=RR,NS
+인도 10년,IN10YT=RR,NS
+인도 11년,IN11YT=RR,NS
+인도 12년,IN12YT=RR,NS
+인도 13년,IN13YT=RR,NS
+인도 14년,IN14YT=RR,NS
+인도 15년,IN15YT=RR,NS
+인도 19년,IN19YT=RR,NS
+인도 24년,IN24YT=RR,NS
+인도 30년,IN30YT=RR,NS
+캐나다 1개월,CA1MT=RR,TSX
+캐나다 2개월,CA2MT=RR,TSX
+캐나다 3개월,CA3MT=RR,TSX
+캐나다 6개월,CA6MT=RR,TSX
+캐나다 1년,CA1YT=RR,TSX
+캐나다 2년,CA2YT=RR,TSX
+캐나다 3년,CA3YT=RR,TSX
+캐나다 4년,CA4YT=RR,TSX
+캐나다 5년,CA5YT=RR,TSX
+캐나다 7년,CA7YT=RR,TSX
+캐나다 10년,CA10YT=RR,TSX
+캐나다 20년,CA20YT=RR,TSX
+캐나다 30년,CA30YT=RR,TSX
+호주 1년,AU1YT=RR,ASX
+호주 2년,AU2YT=RR,ASX
+호주 3년,AU3YT=RR,ASX
+호주 4년,AU4YT=RR,ASX
+호주 5년,AU5YT=RR,ASX
+호주 6년,AU6YT=RR,ASX
+호주 7년,AU7YT=RR,ASX
+호주 8년,AU8YT=RR,ASX
+호주 9년,AU9YT=RR,ASX
+호주 10년,AU10YT=RR,ASX
+호주 12년,AU12YT=RR,ASX
+호주 15년,AU15YT=RR,ASX
+호주 20년,AU20YT=RR,ASX
+호주 30년,AU30YT=RR,ASX
+브라질 3개월,BR3MT=RR,BVMF
+브라질 6개월,BR6MT=RR,BVMF
+브라질 9개월,BR9MT=RR,BVMF
+브라질 1년,BR1YT=RR,BVMF
+브라질 2년,BR2YT=RR,BVMF
+브라질 3년,BR3YT=RR,BVMF
+브라질 5년,BR5YT=RR,BVMF
+브라질 8년,BR8YT=RR,BVMF
+브라질 10년,BR10YT=RR,BVMF
+영국 1개월,GB1MT=RR,LON
+영국 3개월,GB3MT=RR,LON
+영국 6개월,GB6MT=RR,LON
+영국 1년,GB1YT=RR,LON
+영국 2년,GB2YT=RR,LON
+영국 3년,GB3YT=RR,LON
+영국 4년,GB4YT=RR,LON
+영국 5년,GB5YT=RR,LON
+영국 6년,GB6YT=RR,LON
+영국 7년,GB7YT=RR,LON
+영국 8년,GB8YT=RR,LON
+영국 9년,GB9YT=RR,LON
+영국 10년,GB10YT=RR,LON
+영국 15년,GB15YT=RR,LON
+영국 12년,GB12YT=RR,LON
+영국 20년,GB20YT=RR,LON
+영국 25년,GB25YT=RR,LON
+영국 30년,GB30YT=RR,LON
+영국 40년,GB40YT=RR,LON
+영국 50년,GB50YT=RR,LON
+이탈리아 1개월,IT1MT=RR,BIT
+이탈리아 3개월,IT3MT=RR,BIT
+이탈리아 6개월,IT6MT=RR,BIT
+이탈리아 9개월,IT9MT=RR,BIT
+이태리 1년,IT1YT=RR,BIT
+이탈리아 2년,IT2YT=RR,BIT
+이탈리아 3년,IT3YT=RR,BIT
+이탈리아 4년,IT4YT=RR,BIT
+이탈리아 5년,IT5YT=RR,BIT
+이탈리아 6년,IT6YT=RR,BIT
+이탈리아 7년,IT7YT=RR,BIT
+이탈리아 8년,IT8YT=RR,BIT
+이탈리아 9년,IT9YT=RR,BIT
+이탈리아 10년,IT10YT=RR,BIT
+이탈리아 15년,IT15YT=RR,BIT
+이탈리아 20년,IT20YT=RR,BIT
+이탈리아 30년,IT30YT=RR,BIT
