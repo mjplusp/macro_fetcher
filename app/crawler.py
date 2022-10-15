@@ -23,13 +23,13 @@ class MacroFetcher:
         
   
     def __init_settings(self) -> None:
-        with open("settings.yaml") as f:
+        with open("app/settings.yaml") as f:
             keys: dict = yaml.load(f, Loader=yaml.FullLoader)
             self.telegram_info: dict = keys.get("telegram")
             self.web_info: dict = keys.get("web-info")
 
     def __read_meta(self) -> None:
-        with open('watchlist_meta.json', encoding="utf-8") as d:
+        with open('app/resources/watchlist_meta.json', encoding="utf-8") as d:
             dictData: dict = json.load(d)
             index_meta = dictData.get("index_meta")
             currency_meta = dictData.get("currency_meta")
@@ -72,7 +72,7 @@ class MacroFetcher:
 
         # Create Chrome webDriver
         self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
-        print("Chrome driver setup completed")
+        print("Chrome Driver Setup Completed")
         
         return None
     
@@ -89,28 +89,28 @@ class MacroFetcher:
 
             self.driver.execute_script("loginPageFunctions.submitLogin();")
 
-            print("login successful")
+            print("Login Successful")
             self.is_signed_in = True
 
         except Exception:
-            print("login failed")
+            print("Login Failed")
     
     def process_table(self, df: pd.DataFrame) -> None:
         columns = ["symbol", "exchange", "last", "open", "high", "low", "daily_change", "daily_pct_change", "volume", "as_of"]
 
         df["symbol"] = df["unrevised_symbol"].apply(lambda x: x.split("=")[0])
 
-        index_df = df.loc[df['unrevised_symbol'].isin(self.index_symbol_list)]
+        index_df = df.loc[df['unrevised_symbol'].isin(self.index_symbol_list)].copy()
         index_df = index_df[columns]
         index_df = self.transform_symbol(index_df)
 
-        currency_df = df.loc[df['name'].isin(self.currency_symbol_list)]
+        currency_df = df.loc[df['name'].isin(self.currency_symbol_list)].copy()
         currency_df["symbol"] = currency_df["name"]
         currency_df = currency_df[columns]
         currency_df = self.transform_symbol(currency_df)
 
         
-        bond_df = df.loc[df['symbol'].isin(self.bond_symbol_list)]
+        bond_df = df.loc[df['symbol'].isin(self.bond_symbol_list)].copy()
         bond_df = bond_df[columns]
         bond_df = self.transform_symbol(bond_df)
 
@@ -120,8 +120,8 @@ class MacroFetcher:
     
     def transform_symbol(self, df: pd.DataFrame) -> None:
         columns = ["symbol", "last", "open", "high", "low", "daily_change", "daily_pct_change", "volume", "as_of"]
-        df["symbol_checker"] = df["symbol"] + df["exchange"]
-        df["symbol"] = df["symbol_checker"].apply(lambda x: self.symbol_map[x])
+        df.loc[:,"symbol_checker"] = df["symbol"] + df["exchange"]
+        df.loc[:,"symbol"] = df["symbol_checker"].apply(lambda x: self.symbol_map[x])
         return df[columns]
     
     def fetch_infinitely(self) -> None:
@@ -166,7 +166,7 @@ class MacroFetcher:
             time.sleep(60)
 
 if __name__ == "__main__":
-    print("[정보] Started Investing Crawler")
+    print("Crawler Started")
     
     crawler = MacroFetcher(False)
     crawler.sign_in()
