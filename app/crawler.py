@@ -1,4 +1,3 @@
-from operator import index
 import time
 import yaml, json
 import pandas as pd
@@ -17,6 +16,10 @@ class MacroFetcher:
         self.web_info: dict
         self.is_signed_in = False
         self.driver: webdriver.Chrome
+
+        self.today = utils.get_day_and_time()[0]
+        self.db_dir: str
+        self.db_name: str
         self.db: Database
 
         self.__init_settings()
@@ -27,12 +30,23 @@ class MacroFetcher:
         
   
     def __init_settings(self) -> None:
-        (today, _) = utils.get_day_and_time()
         with open("app/settings.yaml") as f:
             keys: dict = yaml.load(f, Loader=yaml.FullLoader)
             self.telegram_info: dict = keys.get("telegram")
             self.web_info: dict = keys.get("web-info")
-            self.db = Database(keys.get("db")["path"] + "/" + today + ".sqlite3")
+
+            self.db_dir = keys.get("db")["path"]
+            self.db_name = self.today + ".sqlite3"
+            self.db = Database(self.db_dir + "/" + self.db_name)
+    
+    def __roll_db(self) -> None:
+        (today, _) = utils.get_day_and_time()
+        if today > self.today:
+            self.db.close()
+            self.today = today
+            self.db_name = today + ".sqlite3"
+            self.db = Database(self.db_dir + "/" + self.db_name)
+
 
     def __read_meta(self) -> None:
         with open('app/resources/watchlist_meta.json', encoding="utf-8") as d:
