@@ -1,3 +1,4 @@
+from operator import index
 import time
 import yaml, json
 import pandas as pd
@@ -7,26 +8,31 @@ from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 from html_table_parser import parser_functions as parser
 from webdriver_manager.chrome import ChromeDriverManager
+from storage.sqlite_connector import Database
+import utils
 
 class MacroFetcher:
-    def __init__(self, headless = True):
+    def __init__(self, headless = True, driver_path = "chromedriver"):
         self.telegram_info: dict
         self.web_info: dict
         self.is_signed_in = False
         self.driver: webdriver.Chrome
+        self.db: Database
 
         self.__init_settings()
         self.__read_meta()
-        self.__init_chrome_driver(headless = headless)
+        self.__init_chrome_driver(headless = headless, driver_path=driver_path)
 
         self.driver.implicitly_wait(time_to_wait=2)
         
   
     def __init_settings(self) -> None:
+        (today, _) = utils.get_day_and_time()
         with open("app/settings.yaml") as f:
             keys: dict = yaml.load(f, Loader=yaml.FullLoader)
             self.telegram_info: dict = keys.get("telegram")
             self.web_info: dict = keys.get("web-info")
+            self.db = Database(keys.get("db")["path"] + "/" + today + ".sqlite3")
 
     def __read_meta(self) -> None:
         with open('app/resources/watchlist_meta.json', encoding="utf-8") as d:
@@ -48,8 +54,9 @@ class MacroFetcher:
             self.bond_symbol_list.append(metas["original_symbol"])
             self.symbol_map[metas["original_symbol"]+metas["exchange"]] = metas["symbol"]
 
-    def __init_chrome_driver(self, headless: bool) -> None:
+    def __init_chrome_driver(self, headless: bool, driver_path) -> None:
         chrome_options = webdriver.ChromeOptions()
+        # chrome_options.binary_location = driver_path 
 
         chrome_prefs = {}
         chrome_options.experimental_options["prefs"] = chrome_prefs
@@ -64,6 +71,7 @@ class MacroFetcher:
         "Chrome/104.0.5112.102 Safari/537.36 Edg/104.0.1293.70")
         chrome_options.add_argument('--disable-extensions')
         chrome_options.add_argument('--disable-gpu')
+        chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument('--disable-dev-shm-usage')
         chrome_options.add_argument("--dns-prefetch-disable")
         chrome_options.add_argument("--blink-setting=imagesEnable=false")
@@ -71,7 +79,7 @@ class MacroFetcher:
         chrome_options.add_argument('--log-level=3')
 
         # Create Chrome webDriver
-        self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
+        self.driver = webdriver.Chrome(executable_path=driver_path, service=Service(ChromeDriverManager().install()), options=chrome_options)
         print("Chrome Driver Setup Completed")
         
         return None
@@ -96,7 +104,7 @@ class MacroFetcher:
             print("Login Failed")
     
     def process_table(self, df: pd.DataFrame) -> None:
-        columns = ["symbol", "exchange", "last", "open", "high", "low", "daily_change", "daily_pct_change", "volume", "as_of"]
+        columns = ["date", "time", "symbol", "exchange", "last", "open", "high", "low", "daily_change", "daily_pct_change", "volume", "as_of"]
 
         df["symbol"] = df["unrevised_symbol"].apply(lambda x: x.split("=")[0])
 
@@ -114,12 +122,12 @@ class MacroFetcher:
         bond_df = bond_df[columns]
         bond_df = self.transform_symbol(bond_df)
 
-        print(index_df)
-        print(currency_df)
-        print(bond_df)
+        index_df.to_sql("index", self.db.conn, if_exists="append", index=False)
+        currency_df.to_sql("currency", self.db.conn, if_exists="append", index=False)
+        bond_df.to_sql("bond_yield", self.db.conn, if_exists="append", index=False)
     
-    def transform_symbol(self, df: pd.DataFrame) -> None:
-        columns = ["symbol", "last", "open", "high", "low", "daily_change", "daily_pct_change", "volume", "as_of"]
+    def transform_symbol(self, df: pd.DataFrame) -> pd.DataFrame:
+        columns = ["date", "time", "symbol", "last", "open", "high", "low", "daily_change", "daily_pct_change", "volume", "as_of"]
         df.loc[:,"symbol_checker"] = df["symbol"] + df["exchange"]
         df.loc[:,"symbol"] = df["symbol_checker"].apply(lambda x: self.symbol_map[x])
         return df[columns]
@@ -131,6 +139,7 @@ class MacroFetcher:
             soup = BeautifulSoup(self.driver.page_source, 'html.parser')
 
             # Parse table elements
+            (today, current_hms) = utils.get_day_and_time()
             watchlist_table_element = soup.find_all("table")[1]
 
             # Make table 2d
@@ -139,6 +148,8 @@ class MacroFetcher:
             # Make pandas dataFrame
             df = pd.DataFrame(data=watchlist_table[1:], columns=watchlist_table[0])
             df.reset_index(drop=True, inplace=True)
+            df["date"] = today
+            df["time"] = current_hms
 
             df = df.rename(columns={
                 "Name":"name",
@@ -154,7 +165,7 @@ class MacroFetcher:
                 "Time":"as_of",
                 })
             
-            df = df[["name", "unrevised_symbol", "exchange", "last", "open", "high", "low", "daily_change", "daily_pct_change", "volume", "as_of"]]
+            df = df[["date", "time", "name", "unrevised_symbol", "exchange", "last", "open", "high", "low", "daily_change", "daily_pct_change", "volume", "as_of"]]
 
             # Drop DataFrame
             # df = df.drop(labels=["매수", "매도", "연장시간", "연장시간 (%)", "다음 실적 발표일"], axis=1)
@@ -163,7 +174,7 @@ class MacroFetcher:
             # df.to_excel("test.xlsx")
             self.process_table(df)
 
-            time.sleep(60)
+            time.sleep(10)
 
 if __name__ == "__main__":
     print("Crawler Started")

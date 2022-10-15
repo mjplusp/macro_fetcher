@@ -9,3 +9,6 @@ web-info:
   watchlist-path: "/portfolio/?portfolioID=ID" # Change ID
   email: ""
   password: ""
+
+db:
+  path: ./app/_database
