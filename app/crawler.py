@@ -39,39 +39,39 @@ class MacroFetcher:
             self.db_name = self.today + ".sqlite3"
             self.db = Database(self.db_dir + "/" + self.db_name)
     
-    def __roll_db(self) -> None:
-        (today, _) = utils.get_day_and_time()
+    def __roll_db(self, today) -> None:
         if today > self.today:
             self.db.close()
             self.today = today
             self.db_name = today + ".sqlite3"
             self.db = Database(self.db_dir + "/" + self.db_name)
+            self.__read_meta()
 
 
     def __read_meta(self) -> None:
         with open('app/resources/watchlist_meta.json', encoding="utf-8") as d:
-            dictData: dict = json.load(d)
-            index_meta = dictData.get("index_meta")
-            currency_meta = dictData.get("currency_meta")
-            bond_meta = dictData.get("bond_meta")
+            meta_list: list = json.load(d)
+
+            meta_df = pd.DataFrame(meta_list)
+            meta_df.to_sql("macro_meta", self.db.conn, if_exists="replace", index=False)
         
         self.index_symbol_list, self.currency_symbol_list, self.bond_symbol_list = [], [], []
         self.symbol_map = {}
 
-        for metas in index_meta:
-            self.index_symbol_list.append(metas["original_symbol"])
-            self.symbol_map[metas["original_symbol"]+metas["exchange"]] = metas["symbol"]
-        for metas in currency_meta:
-            self.currency_symbol_list.append(metas["original_symbol"])
-            self.symbol_map[metas["original_symbol"]+metas["exchange"]] = metas["symbol"]
-        for metas in bond_meta:
-            self.bond_symbol_list.append(metas["original_symbol"])
-            self.symbol_map[metas["original_symbol"]+metas["exchange"]] = metas["symbol"]
+        for meta in meta_list:
+            self.symbol_map[meta["original_symbol"]+meta["exchange"]] = meta["symbol"]
+
+            meta_type = meta["type"]
+
+            if meta_type == "index":
+                self.index_symbol_list.append(meta["original_symbol"])
+            elif meta_type == "currency":
+                self.currency_symbol_list.append(meta["original_symbol"])
+            elif meta_type == "bond":
+                self.bond_symbol_list.append(meta["original_symbol"])
 
     def __init_chrome_driver(self, headless: bool, driver_path) -> None:
         chrome_options = webdriver.ChromeOptions()
-        # chrome_options.binary_location = driver_path 
-
         chrome_prefs = {}
         chrome_options.experimental_options["prefs"] = chrome_prefs
         chrome_prefs["profile.default_content_settings"] = {"images": 2}
@@ -117,23 +117,23 @@ class MacroFetcher:
         except Exception:
             print("Login Failed")
     
-    def process_table(self, df: pd.DataFrame) -> None:
-        columns = ["date", "time", "symbol", "exchange", "last", "open", "high", "low", "daily_change", "daily_pct_change", "volume", "as_of"]
+    def enter_watchlist(self) -> None:
+        self.driver.get(self.web_info.get("host") + self.web_info.get("watchlist-path"))
 
+    def process_table(self, df: pd.DataFrame) -> None:
+        # Bond Symbol 전처리
         df["symbol"] = df["unrevised_symbol"].apply(lambda x: x.split("=")[0])
 
-        index_df = df.loc[df['unrevised_symbol'].isin(self.index_symbol_list)].copy()
-        index_df = index_df[columns]
+        # Index의 경우 Symbol을 그대로 이용
+        index_df = df.loc[df['symbol'].isin(self.index_symbol_list)].copy()
         index_df = self.transform_symbol(index_df)
 
+        # Currency의 경우 Name이 곧 Symbol
         currency_df = df.loc[df['name'].isin(self.currency_symbol_list)].copy()
         currency_df["symbol"] = currency_df["name"]
-        currency_df = currency_df[columns]
         currency_df = self.transform_symbol(currency_df)
-
         
         bond_df = df.loc[df['symbol'].isin(self.bond_symbol_list)].copy()
-        bond_df = bond_df[columns]
         bond_df = self.transform_symbol(bond_df)
 
         index_df.to_sql("index", self.db.conn, if_exists="append", index=False)
@@ -146,49 +146,43 @@ class MacroFetcher:
         df.loc[:,"symbol"] = df["symbol_checker"].apply(lambda x: self.symbol_map[x])
         return df[columns]
     
-    def fetch_infinitely(self) -> None:
-        self.driver.get(self.web_info.get("host") + self.web_info.get("watchlist-path"))
+    def fetch_data(self) -> None:
+        soup = BeautifulSoup(self.driver.page_source, 'html.parser')
 
-        while True:
-            soup = BeautifulSoup(self.driver.page_source, 'html.parser')
+        # Parse table elements
+        watchlist_table_element = soup.find_all("table")[1]
+        (today, current_hms) = utils.get_day_and_time()
+        current_hms = current_hms[:4]+"00" # 매 분마다 돌아갈 경우
 
-            # Parse table elements
-            (today, current_hms) = utils.get_day_and_time()
-            watchlist_table_element = soup.find_all("table")[1]
+        self.__roll_db(today)
 
-            # Make table 2d
-            watchlist_table = parser.make2d(watchlist_table_element)
+        # Make table 2d
+        watchlist_table = parser.make2d(watchlist_table_element)
 
-            # Make pandas dataFrame
-            df = pd.DataFrame(data=watchlist_table[1:], columns=watchlist_table[0])
-            df.reset_index(drop=True, inplace=True)
-            df["date"] = today
-            df["time"] = current_hms
+        # Make pandas dataFrame
+        df = pd.DataFrame(data=watchlist_table[1:], columns=watchlist_table[0])
+        df.reset_index(drop=True, inplace=True)
+        df["date"] = today
+        df["time"] = current_hms
 
-            df = df.rename(columns={
-                "Name":"name",
-                "Symbol":"unrevised_symbol",
-                "Exchange":"exchange",
-                "Last":"last",
-                "Open":"open",
-                "High":"high",
-                "Low":"low",
-                "Chg.":"daily_change",
-                "Chg. %":"daily_pct_change",
-                "Vol.":"volume",
-                "Time":"as_of",
-                })
-            
-            df = df[["date", "time", "name", "unrevised_symbol", "exchange", "last", "open", "high", "low", "daily_change", "daily_pct_change", "volume", "as_of"]]
+        df = df.rename(columns={
+            "Name":"name",
+            "Symbol":"unrevised_symbol",
+            "Exchange":"exchange",
+            "Last":"last",
+            "Open":"open",
+            "High":"high",
+            "Low":"low",
+            "Chg.":"daily_change",
+            "Chg. %":"daily_pct_change",
+            "Vol.":"volume",
+            "Time":"as_of",
+            })
+        
+        df = df[["date", "time", "name", "unrevised_symbol", "exchange", "last", "open", "high", "low", "daily_change", "daily_pct_change", "volume", "as_of"]]
+        self.process_table(df)
 
-            # Drop DataFrame
-            # df = df.drop(labels=["매수", "매도", "연장시간", "연장시간 (%)", "다음 실적 발표일"], axis=1)
-
-            # print(df)
-            # df.to_excel("test.xlsx")
-            self.process_table(df)
-
-            time.sleep(10)
+        print(f"Data Fetched at {utils.get_day_and_time()}")
 
 if __name__ == "__main__":
     print("Crawler Started")
@@ -197,4 +191,5 @@ if __name__ == "__main__":
     crawler.sign_in()
 
     if crawler.is_signed_in:
-        crawler.fetch_infinitely()
+        crawler.enter_watchlist()
+        crawler.fetch_data()
