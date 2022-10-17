@@ -58,8 +58,8 @@ class MacroFetcher:
         with open("app/resources/watchlist_meta.json", encoding="utf-8") as d:
             meta_list: list = json.load(d)
 
-            meta_df = pd.DataFrame(meta_list)
-            meta_df.to_sql("macro_meta", self.db.conn, if_exists="replace", index=False)
+        meta_df = pd.DataFrame(meta_list)
+        self.__insert_df(meta_df, "macro_meta")
 
         self.index_symbol_list, self.currency_name_list, self.bond_symbol_list = [], [], []
         self.symbol_map = {}
@@ -78,10 +78,17 @@ class MacroFetcher:
             elif meta_type == "bond":
                 self.bond_symbol_list.append(meta["original_symbol"])
 
+    def __insert_df(self, source: pd.DataFrame, table) -> None:
+        self.db.cursor.execute("BEGIN TRANSACTION")
+        for _, row in source.iterrows():       
+            self.db.cursor.execute('INSERT INTO '+table+' ('+ str(', '.join(source.columns))+ ') VALUES '+ str(tuple(row.values))) 
+        self.db.cursor.execute("END TRANSACTION")
+
     def __prepare_db(self) -> None:
         self.db.cursor.execute(q.market_index_table)
         self.db.cursor.execute(q.fx_rate_table)
         self.db.cursor.execute(q.bond_yield_table)
+        self.db.cursor.execute(q.macro_meta_table)
         self.__read_meta()
 
     def __db_roll_needed(self, date) -> bool:
@@ -198,9 +205,9 @@ class MacroFetcher:
         bond_df = bond_df[~(bond_df["time"] + bond_df["symbol"]).isin(time_code_pair_list)]
 
         # Save to DB
-        index_df.to_sql("market_index", self.db.conn, if_exists="append", index=False)
-        currency_df.to_sql("fx_rate", self.db.conn, if_exists="append", index=False)
-        bond_df.to_sql("bond_yield", self.db.conn, if_exists="append", index=False)
+        self.__insert_df(index_df, "market_index")
+        self.__insert_df(currency_df, "fx_rate")
+        self.__insert_df(bond_df, "bond_yield")
 
     def fetch_data(self) -> None:
         soup = BeautifulSoup(self.driver.page_source, "html.parser")

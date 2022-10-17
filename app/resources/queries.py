@@ -1,3 +1,12 @@
+macro_meta_table = """ CREATE TABLE IF NOT EXISTS macro_meta (
+    name VARCHAR(255),
+    name_kr VARCHAR(255),
+    original_symbol VARCHAR(255),
+    symbol VARCHAR(255),
+    exchange VARCHAR(255),
+    type VARCHAR(255)
+    );"""
+
 market_index_table = """ CREATE TABLE IF NOT EXISTS market_index (
     date VARCHAR(8),
     time VARCHAR(6),
