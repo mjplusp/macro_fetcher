@@ -19,13 +19,14 @@ if len(sys.argv) > 1:
     driver_path = sys.argv[1]
 
 print("Crawler Started. Driver Path: ", driver_path)
-crawler = MacroFetcher(driver_path=driver_path)
+crawler = MacroFetcher(driver_path=driver_path, headless=True)
 crawler.sign_in()
 
 if crawler.is_signed_in:
     crawler.enter_watchlist()
-    schedule.every().minute.at(":00").do(crawler.fetch_data)
-    schedule.every().minute.at(":30").do(crawler.enter_watchlist)
+    # crawler.fetch_data()
+    schedule.every(10).seconds.do(crawler.fetch_data)
+    schedule.every().minute.at(":00").do(crawler.enter_watchlist)
 
     while True:
         schedule.run_pending()
