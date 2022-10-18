@@ -11,6 +11,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from storage.sqlite_connector import Database
 import utils
 import resources.queries as q
+import traceback
 
 class MacroFetcher:
     def __init__(self, headless=True, driver_path="chromedriver"):
@@ -210,75 +211,79 @@ class MacroFetcher:
         self.__insert_df(bond_df, "bond_yield")
 
     def fetch_data(self) -> None:
-        soup = BeautifulSoup(self.driver.page_source, "html.parser")
+        try:
+            soup = BeautifulSoup(self.driver.page_source, "html.parser")
 
-        # Parse table elements
-        watchlist_table_element = soup.find_all("table")[1]
-        (today, current_hms) = utils.get_day_and_time()
+            # Parse table elements
+            watchlist_table_element = soup.find_all("table")[1]
+            (today, current_hms) = utils.get_day_and_time()
 
-        self.__roll_db(today)
+            self.__roll_db(today)
 
-        if today != self.today:
-            self.today = today
+            if today != self.today:
+                self.today = today
 
-        # Make table 2d
-        watchlist_table = parser.make2d(watchlist_table_element)
+            # Make table 2d
+            watchlist_table = parser.make2d(watchlist_table_element)
 
-        # Make pandas dataFrame
-        df = pd.DataFrame(data=watchlist_table[1:], columns=watchlist_table[0])
-        # Filter yesterday data
-        df = df.loc[df["시간"].str.match(r"[0-2][0-9]:[0-9][0-9]:[0-9][0-9]")]
-        df["시간"] = df["시간"].apply(lambda x: x.replace(":", ""))
-        df = df[df["시간"] < current_hms]
-        # Type change: string -> float
-        df["종가"] = df["종가"].apply(lambda x: float(x.replace(",", "")))
-        df["오픈"] = df["오픈"].apply(lambda x: float(x.replace(",", "")))
-        df["고가"] = df["고가"].apply(lambda x: float(x.replace(",", "")))
-        df["저가"] = df["저가"].apply(lambda x: float(x.replace(",", "")))
-        df["변동"] = df["변동"].apply(lambda x: float(x.replace(",", "").replace("+", "")))
-        df["변동 %"] = df["변동 %"].apply(lambda x: float(x.replace(",", "").replace("+", "").replace("%", "")))
+            # Make pandas dataFrame
+            df = pd.DataFrame(data=watchlist_table[1:], columns=watchlist_table[0])
+            # Filter yesterday data
+            df = df.loc[df["시간"].str.match(r"[0-2][0-9]:[0-9][0-9]:[0-9][0-9]")]
+            df["시간"] = df["시간"].apply(lambda x: x.replace(":", ""))
+            df = df[df["시간"] < current_hms]
+            # Type change: string -> float
+            df["종가"] = df["종가"].apply(lambda x: float(x.replace(",", "")))
+            df["오픈"] = df["오픈"].apply(lambda x: float(x.replace(",", "")))
+            df["고가"] = df["고가"].apply(lambda x: float(x.replace(",", "")))
+            df["저가"] = df["저가"].apply(lambda x: float(x.replace(",", "")))
+            df["변동"] = df["변동"].apply(lambda x: float(x.replace(",", "").replace("+", "")))
+            df["변동 %"] = df["변동 %"].apply(lambda x: float(x.replace(",", "").replace("+", "").replace("%", "")))
 
-        df.reset_index(drop=True, inplace=True)
-        df["date"] = today
-        df["created_at"] = current_hms
+            df.reset_index(drop=True, inplace=True)
+            df["date"] = today
+            df["created_at"] = current_hms
 
-        df = df.rename(
-            columns={
-                "종목": "name",
-                "기호": "unrevised_symbol",
-                "거래소": "exchange",
-                "종가": "last",
-                "오픈": "open",
-                "고가": "high",
-                "저가": "low",
-                "변동": "daily_change",
-                "변동 %": "daily_pct_change",
-                "거래량": "volume",
-                "시간": "time",
-            }
-        )
+            df = df.rename(
+                columns={
+                    "종목": "name",
+                    "기호": "unrevised_symbol",
+                    "거래소": "exchange",
+                    "종가": "last",
+                    "오픈": "open",
+                    "고가": "high",
+                    "저가": "low",
+                    "변동": "daily_change",
+                    "변동 %": "daily_pct_change",
+                    "거래량": "volume",
+                    "시간": "time",
+                }
+            )
 
-        df = df[
-            [
-                "date",
-                "time",
-                "name",
-                "unrevised_symbol",
-                "exchange",
-                "last",
-                "open",
-                "high",
-                "low",
-                "daily_change",
-                "daily_pct_change",
-                "volume",
-                "created_at",
+            df = df[
+                [
+                    "date",
+                    "time",
+                    "name",
+                    "unrevised_symbol",
+                    "exchange",
+                    "last",
+                    "open",
+                    "high",
+                    "low",
+                    "daily_change",
+                    "daily_pct_change",
+                    "volume",
+                    "created_at",
+                ]
             ]
-        ]
 
-        self.process_table(df, today)
+            self.process_table(df, today)
+            print(f"Data Fetched at {utils.get_day_and_time()}")
 
-        print(f"Data Fetched at {utils.get_day_and_time()}")
+        except Exception:
+            traceback.print_exc()
+
 
 
 if __name__ == "__main__":
