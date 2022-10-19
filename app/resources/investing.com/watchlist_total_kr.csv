@@ -16,6 +16,15 @@ US Tech 100 Cash,USTECH,US Indexes
 나스닥종합지수,.IXIC,NASDAQ
 CBOE Volatility Index,VIX,CBOE
 S&P 500 VIX 선물,VX,CBOE
+금 선물,GC,ICE
+은 선물,SI,ICE
+구리 선물,HG,COMEX
+철광석,TIOc1,CME
+WTI유 선물,CL,ICE
+브렌트유 선물,LCO,ICE
+미국 소맥 선물,ZW,
+미국 대두 선물,ZS,
+미국 옥수수 선물,ZC,
 USD/CNY - 미국 달러 중국 위안,USD/CNY - 미국 달러 중국 위안,외환
 USD/GBP - 미국 달러 영국 파운드,USD/GBP - 미국 달러 영국 파운드,외환
 USD/EUR - 미국 달러 유로,USD/EUR - 미국 달러 유로,외환

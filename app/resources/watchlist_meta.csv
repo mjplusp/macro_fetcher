@@ -16,35 +16,44 @@ Nasdaq 100 Futures,나스닥 100 선물,USTECH,NDX100F,US Indexes,index
 NASDAQ Composite,나스닥종합지수,IXIC,NDX,NASDAQ,index
 CBOE Volatility Index,CBOE Volatility Index,VIX,VIX,CBOE,index
 S&P 500 VIX Futures,S&P 500 VIX 선물,VX,VX,CBOE,index
-US Dollar Chinese Yuan,달러/중국 위안?,USD/CNY,USD/CNY,FX,currency
-US Dollar British Pound,달러/파운드?,USD/GBP,USD/GBP,FX,currency
-US Dollar Euro,달러/유로?,USD/EUR,USD/EUR,FX,currency
-US Dollar Japanese Yen,달러/엔?,USD/JPY,USD/JPY,FX,currency
-US Dollar Swiss Franc,달러/스위스 프랑?,USD/CHF,USD/CHF,FX,currency
-US Dollar Swedish Krona,달러/스웨덴 크로나?,USD/SEK,USD/SEK,FX,currency
-US Dollar Canadian Dollar,달러/캐나다 달러?,USD/CAD,USD/CAD,FX,currency
-US Dollar Australian Dollar,달러/호주 달러?,USD/AUD,USD/AUD,FX,currency
-US Dollar Hong Kong Dollar,달러/홍콩 달러?,USD/HKD,USD/HKD,FX,currency
-US Dollar Singapore Dollar,달러/싱가폴 달러?,USD/SGD,USD/SGD,FX,currency
-US Dollar Qatari Riyal,달러/카타르 리얄?,USD/QAR,USD/QAR,FX,currency
-US Dollar Hungarian Forint,달러/헝가리 포린트?,USD/HUF,USD/HUF,FX,currency
-US Dollar Norwegian Krone,달러/노르웨이 크로네?,USD/NOK,USD/NOK,FX,currency
-US Dollar South African Rand,달러/남아프리카 란드?,USD/ZAR,USD/ZAR,FX,currency
-US Dollar French Pacific Franc,달러/프랑스 퍼시픽 프랑?,USD/XPF,USD/XPF,FX,currency
-US Dollar Polish Zloty,달러/폴란드 즈워티?,USD/PLN,USD/PLN,FX,currency
-US Dollar Israeli Shekel,달러/이스라엘 세켈?,USD/ILS,USD/ILS,FX,currency
-US Dollar Turkish Lira,달러/터키 리라?,USD/TRY,USD/TRY,FX,currency
-US Dollar Thai Baht,달러/태국 바트?,USD/THB,USD/THB,FX,currency
-US Dollar Russian Ruble,달러/러시아 루블?,USD/RUB,USD/RUB,FX,currency
-US Dollar Indonesian Rupiah,달러/인도네시아 루피아?,USD/IDR,USD/IDR,FX,currency
-US Dollar Indian Rupee,달러/인도 루피?,USD/INR,USD/INR,FX,currency
-US Dollar Brazil Real,달러/브라질 헤알?,USD/BRL,USD/BRL,FX,currency
-US Dollar Korean Won,달러/원?,USD/KRW,USD/KRW,FX,currency
-Chinese Yuan Korean Won,중국 위안/원?,CNY/KRW,CNY/KRW,FX,currency
-Japanese Yen Korean Won,엔/원?,JPY/KRW,JPY/KRW,FX,currency
-Bitcoin US Dollar,비트코인/달러?,BTC/USD,BTC/USD,Binance,currency
-Ethereum US Dollar,이더리움/달러?,ETH/USD,ETH/USD,Binance,currency
-XRP US Dollar,XRP/달러?,XRP/USD,XRP/USD,Binance,currency
+Gold Futures,금 선물,GC,GC,ICE,commodity
+Silver Futures,은 선물,SI,SI,ICE,commodity
+Copper Futures,구리 선물,HG,HG,COMEX,commodity
+Iron ore fines 62% Fe CFR Futures,철광석,TIOc1,TIOc1,CME,commodity
+Crude Oil WTI Futures,WTI유 선물,CL,CL,ICE,commodity
+Brent Oil Futures,브렌트유 선물,LCO,LCO,ICE,commodity
+US Wheat Futures,미국 소맥 선물,ZW,ZW,,commodity
+US Soybeans Futures,미국 대두 선물,ZS,ZS,,commodity
+US Corn Futures,미국 옥수수 선물,ZC,ZC,,commodity
+US Dollar Chinese Yuan,달러/중국 위안,USD/CNY,USD/CNY,FX,currency
+US Dollar British Pound,달러/파운드,USD/GBP,USD/GBP,FX,currency
+US Dollar Euro,달러/유로,USD/EUR,USD/EUR,FX,currency
+US Dollar Japanese Yen,달러/엔,USD/JPY,USD/JPY,FX,currency
+US Dollar Swiss Franc,달러/스위스 프랑,USD/CHF,USD/CHF,FX,currency
+US Dollar Swedish Krona,달러/스웨덴 크로나,USD/SEK,USD/SEK,FX,currency
+US Dollar Canadian Dollar,달러/캐나다 달러,USD/CAD,USD/CAD,FX,currency
+US Dollar Australian Dollar,달러/호주 달러,USD/AUD,USD/AUD,FX,currency
+US Dollar Hong Kong Dollar,달러/홍콩 달러,USD/HKD,USD/HKD,FX,currency
+US Dollar Singapore Dollar,달러/싱가폴 달러,USD/SGD,USD/SGD,FX,currency
+US Dollar Qatari Riyal,달러/카타르 리얄,USD/QAR,USD/QAR,FX,currency
+US Dollar Hungarian Forint,달러/헝가리 포린트,USD/HUF,USD/HUF,FX,currency
+US Dollar Norwegian Krone,달러/노르웨이 크로네,USD/NOK,USD/NOK,FX,currency
+US Dollar South African Rand,달러/남아프리카 란드,USD/ZAR,USD/ZAR,FX,currency
+US Dollar French Pacific Franc,달러/프랑스 퍼시픽 프랑,USD/XPF,USD/XPF,FX,currency
+US Dollar Polish Zloty,달러/폴란드 즈워티,USD/PLN,USD/PLN,FX,currency
+US Dollar Israeli Shekel,달러/이스라엘 세켈,USD/ILS,USD/ILS,FX,currency
+US Dollar Turkish Lira,달러/터키 리라,USD/TRY,USD/TRY,FX,currency
+US Dollar Thai Baht,달러/태국 바트,USD/THB,USD/THB,FX,currency
+US Dollar Russian Ruble,달러/러시아 루블,USD/RUB,USD/RUB,FX,currency
+US Dollar Indonesian Rupiah,달러/인도네시아 루피아,USD/IDR,USD/IDR,FX,currency
+US Dollar Indian Rupee,달러/인도 루피,USD/INR,USD/INR,FX,currency
+US Dollar Brazil Real,달러/브라질 헤알,USD/BRL,USD/BRL,FX,currency
+US Dollar Korean Won,달러/원,USD/KRW,USD/KRW,FX,currency
+Chinese Yuan Korean Won,중국 위안/원,CNY/KRW,CNY/KRW,FX,currency
+Japanese Yen Korean Won,엔/원,JPY/KRW,JPY/KRW,FX,currency
+Bitcoin US Dollar,비트코인/달러,BTC/USD,BTC/USD,Binance,currency
+Ethereum US Dollar,이더리움/달러,ETH/USD,ETH/USD,Binance,currency
+XRP US Dollar,XRP/달러,XRP/USD,XRP/USD,Binance,currency
 United States 1-Month,미국 1개월,US1MT,US1MT,NYSE,bond
 United States 3-Month,미국 3개월,US3MT,US3MT,NYSE,bond
 United States 6-Month,미국 6개월,US6MT,US6MT,NYSE,bond

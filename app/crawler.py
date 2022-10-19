@@ -43,6 +43,7 @@ class MacroFetcher:
             self.db_dir = keys.get("db")["path"]
             self.db_name = self.week_start_date + "_" + self.week_end_date + ".sqlite3"
             self.db = Database(self.db_dir + "/" + self.db_name)
+            self.db.cursor.execute("DROP TABLE IF EXISTS macro_meta")
             self.__prepare_db()
 
     def __set_week_start_end_date(self) -> None:
@@ -62,7 +63,7 @@ class MacroFetcher:
         meta_df = pd.DataFrame(meta_list)
         self.__insert_df(meta_df, "macro_meta")
 
-        self.index_symbol_list, self.currency_name_list, self.bond_symbol_list = [], [], []
+        self.index_symbol_list, self.currency_name_list, self.bond_symbol_list, self.commodity_symbol_list = [], [], [], []
         self.symbol_map = {}
         self.name_map = {}
 
@@ -78,6 +79,8 @@ class MacroFetcher:
                 self.currency_name_list.append(meta["name_kr"])
             elif meta_type == "bond":
                 self.bond_symbol_list.append(meta["original_symbol"])
+            elif meta_type == "commodity":
+                self.commodity_symbol_list.append(meta["original_symbol"])
 
     def __insert_df(self, source: pd.DataFrame, table) -> None:
         self.db.cursor.execute("BEGIN TRANSACTION")
@@ -89,6 +92,7 @@ class MacroFetcher:
         self.db.cursor.execute(q.market_index_table)
         self.db.cursor.execute(q.fx_rate_table)
         self.db.cursor.execute(q.bond_yield_table)
+        self.db.cursor.execute(q.commodity_table)
         self.db.cursor.execute(q.macro_meta_table)
         self.__read_meta()
 
@@ -186,6 +190,10 @@ class MacroFetcher:
         index_df["symbol"] = (index_df["symbol"] + index_df["exchange"]).apply(lambda x: self.symbol_map[x])
         index_df = index_df[columns]
 
+        # Commodity의 경우 Symbol을 그대로 이용
+        commodity_df = df.loc[df["symbol"].isin(self.commodity_symbol_list)].copy()
+        commodity_df = commodity_df[columns]
+
         # Currency의 경우 Name이 곧 Symbol
         currency_df = df.loc[df["name"].isin(self.currency_name_list)].copy()
         currency_df["symbol"] = currency_df["name"].apply(lambda x: self.name_map[x])
@@ -198,17 +206,20 @@ class MacroFetcher:
         _index_df = pd.read_sql(f"SELECT time, symbol FROM market_index WHERE date = '{today}'", self.db.conn)
         _currency_df = pd.read_sql(f"SELECT time, symbol FROM fx_rate WHERE date = '{today}'", self.db.conn)
         _bond_df = pd.read_sql(f"SELECT time, symbol FROM bond_yield WHERE date = '{today}'", self.db.conn)
+        _commodity_df = pd.read_sql(f"SELECT time, symbol FROM commodity WHERE date = '{today}'", self.db.conn)
 
         macro_df_today = pd.concat([_index_df, _currency_df, _bond_df])
         time_code_pair_list = (macro_df_today["time"] + macro_df_today["symbol"]).to_list()
         index_df = index_df[~(index_df["time"] + index_df["symbol"]).isin(time_code_pair_list)]
         currency_df = currency_df[~(currency_df["time"] + currency_df["symbol"]).isin(time_code_pair_list)]
         bond_df = bond_df[~(bond_df["time"] + bond_df["symbol"]).isin(time_code_pair_list)]
+        commodity_df = commodity_df[~(commodity_df["time"] + commodity_df["symbol"]).isin(time_code_pair_list)]
 
         # Save to DB
         self.__insert_df(index_df, "market_index")
         self.__insert_df(currency_df, "fx_rate")
         self.__insert_df(bond_df, "bond_yield")
+        self.__insert_df(commodity_df, "commodity")
 
     def fetch_data(self) -> None:
         try:

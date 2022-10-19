@@ -16,6 +16,15 @@ US Tech 100 Cash,USTECH,US Indexes
 NASDAQ Composite,.IXIC,NASDAQ
 CBOE Volatility Index,VIX,CBOE
 S&P 500 VIX Futures,VX,CBOE
+Gold Futures,GC,ICE
+Silver Futures,SI,ICE
+Copper Futures,HG,COMEX
+Iron ore fines 62% Fe CFR Futures,TIOc1,CME
+Crude Oil WTI Futures,CL,ICE
+Brent Oil Futures,LCO,ICE
+US Wheat Futures,ZW,
+US Soybeans Futures,ZS,
+US Corn Futures,ZC,
 USD/CNY - US Dollar Chinese Yuan,USD/CNY - US Dollar Chinese Yuan,FX
 USD/GBP - US Dollar British Pound,USD/GBP - US Dollar British Pound,FX
 USD/EUR - US Dollar Euro,USD/EUR - US Dollar Euro,FX
