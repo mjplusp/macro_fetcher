@@ -1,3 +1,8 @@
+import os, sys
+
+root_folder = os.path.abspath(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.append(root_folder)
+
 import time
 import yaml, json
 import pandas as pd
@@ -35,7 +40,7 @@ class MacroFetcher:
         self.driver.implicitly_wait(time_to_wait=2)
 
     def __init_settings(self) -> None:
-        with open("app/settings.yaml") as f:
+        with open(os.path.dirname(os.path.abspath(__file__)) + "/settings.yaml") as f:
             keys: dict = yaml.load(f, Loader=yaml.FullLoader)
             self.telegram_info: dict = keys.get("telegram")
             self.web_info: dict = keys.get("web-info")
@@ -57,7 +62,7 @@ class MacroFetcher:
         print(f"today: {self.today}, week start: {self.week_start_date}, week end: {self.week_end_date}")
 
     def __read_meta(self) -> None:
-        with open("app/resources/watchlist_meta.json", encoding="utf-8") as d:
+        with open(os.path.dirname(os.path.abspath(__file__)) + "/resources/watchlist_meta.json", encoding="utf-8") as d:
             meta_list: list = json.load(d)
 
         meta_df = pd.DataFrame(meta_list)
