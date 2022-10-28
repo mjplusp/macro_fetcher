@@ -20,6 +20,7 @@ if len(sys.argv) > 1:
 
 print("Crawler Started. Driver Path: ", driver_path)
 crawler = MacroFetcher(driver_path=driver_path, headless=True)
+print("Signing In ...")
 crawler.sign_in()
 
 if crawler.is_signed_in:
