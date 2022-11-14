@@ -172,6 +172,12 @@ class MacroFetcher:
     def enter_watchlist(self) -> None:
         self.driver.get(self.web_info.get("host") + self.web_info.get("watchlist-path"))
 
+    def enter_watchlist_with_error_check(self) -> None:
+        try:
+            self.enter_watchlist()
+        except Exception:
+            traceback.print_exc()
+
     def process_table(self, df: pd.DataFrame, today: str) -> None:
         columns = [
             "date",

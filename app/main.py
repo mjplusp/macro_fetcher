@@ -27,7 +27,7 @@ if crawler.is_signed_in:
     crawler.enter_watchlist()
     # crawler.fetch_data()
     schedule.every(10).seconds.do(crawler.fetch_data)
-    schedule.every().minute.at(":00").do(crawler.enter_watchlist)
+    schedule.every().minute.at(":00").do(crawler.enter_watchlist_with_error_check)
 
     while True:
         schedule.run_pending()
